@@ -29,7 +29,8 @@ services:
       - mysql
     environment:
       WORKER_PROCESSES: 4
-      VIRTUAL_HOST: whmcs.test
+      PHP_VHOST: whmcs.local
+      VIRTUAL_HOST: docker.local
       APP_PASSWORD: userapppassword
       WHMCS_SERVER_IP: 172.18.18.1
       HTTPS: "on"
@@ -37,7 +38,7 @@ services:
       - 80:80
       - 2222:2222
     volumes:
-      - /your/path/to/whmcs:/var/www/whmcs
+      - ./../whmcs:/var/www/whmcs
 
   mailhog:
     image: mailhog/mailhog
