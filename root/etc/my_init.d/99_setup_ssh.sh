@@ -10,6 +10,7 @@ usermod -d /var/www app
 usermod -s /bin/bash app
 
 # update SSH Configuration
+rm /etc/ssh/ssh_host_rsa_key
 ssh-keygen -t rsa -b 4096 -q -N '' -f /etc/ssh/ssh_host_rsa_key
 sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin no/' /etc/ssh/sshd_config
 sed -ri 's/^#?RSAAuthentication\s+.*/RSAAuthentication yes/' /etc/ssh/sshd_config
