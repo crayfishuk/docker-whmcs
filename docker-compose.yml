@@ -16,7 +16,7 @@ services:
       - 3306:3306
 
   whmcs:
-    image: fauzie/docker-whmcs:latest
+    build: .
     container_name: "WHMCS"
     hostname: whmcs
     networks:
@@ -35,7 +35,7 @@ services:
       - 80:80
       - 2222:2222
     volumes:
-      - /your/path/to/whmcs:/var/www/whmcs
+      - ./../whmcs:/var/www/whmcs
 
 networks:
   whmcs:

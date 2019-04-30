@@ -14,7 +14,7 @@ ENV     PHP_VERSION=7.2 \
 
 COPY    build /build
 
-RUN     build/setup.sh && rm -rf /build
+RUN     bash /build/setup.sh && rm -rf /build
 
 COPY    root/ /
 
