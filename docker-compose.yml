@@ -1,5 +1,9 @@
 version: "2"
 
+volumes:
+  - whmcsdata
+  - whmcsconfig
+
 services:
   mysql:
     image: mysql/mysql-server:5.7
@@ -12,6 +16,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "mysqrootpass"
       MYSQL_ROOT_HOST: '%'
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+      - whmcsdata:/var/lib/mysql
     ports:
       - 3306:3306
 
@@ -27,15 +36,31 @@ services:
       - mysql
     environment:
       WORKER_PROCESSES: 4
-      VIRTUAL_HOST: whmcs.test
+      VIRTUAL_HOST: whmcs.local
       APP_PASSWORD: userapppassword
       WHMCS_SERVER_IP: 172.18.18.1
       HTTPS: "on"
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
     ports:
-      - 80:80
+      - 83:80
       - 2222:2222
     volumes:
       - ./../whmcs:/var/www/whmcs
+
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: "MAILHOG"
+    hostname: mailhog
+    restart: always
+    networks:
+      whmcs:
+        ipv4_address: 172.18.18.4
+    ports:
+      - 8025:8025
+      - 1025:1025
+
 
 networks:
   whmcs:
