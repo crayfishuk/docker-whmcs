@@ -1,8 +1,7 @@
 version: "2"
 
 volumes:
-  - whmcsdata
-  - whmcsconfig
+  whmcsdata:
 
 services:
   mysql:
