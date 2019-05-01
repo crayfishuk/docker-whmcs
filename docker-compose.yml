@@ -46,6 +46,7 @@ services:
       - 2222:2222
     volumes:
       - ./../whmcs:/var/www/whmcs
+      - ./../whmcs-addon:/var/www/whmcs-addon
 
 
   mailhog:
