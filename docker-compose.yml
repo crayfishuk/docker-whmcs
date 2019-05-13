@@ -46,8 +46,10 @@ services:
       - 2222:2222
     volumes:
       - ./../whmcs:/var/www/whmcs
-      - ./../whmcs-addon:/var/www/whmcs-addon
-
+      # These are the links from the whmcs-addon code into the whmcs system
+      - ./../whmcs-addon/modules/addons/my_engine_com:/var/www/whmcs/modules/addons/my_engine_com
+      - ./../whmcs-addon/modules/servers/my_engine_com:/var/www/whmcs/modules/servers/my_engine_com
+      - ./../whmcs-addon/includes/hooks/my_engine_com_includes.php:/var/www/whmcs/includes/hooks/my_engine_com_includes.php
 
   mailhog:
     image: mailhog/mailhog
